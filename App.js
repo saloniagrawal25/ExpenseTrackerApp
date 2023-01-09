@@ -8,6 +8,7 @@ import RecentExpenses from './screens/RecentExpenses';
 import ManageExpenses from './screens/ManageExpenses';
 import {GlobalStyles} from './constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconButton from './UI/IconButton';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -16,7 +17,7 @@ const App = () => {
   const ExpensesOverview = () => {
     return (
       <BottomTab.Navigator
-        screenOptions={{
+        screenOptions={({navigation}) => ({
           headerStyle: {
             backgroundColor: GlobalStyles.colors.primary500,
           },
@@ -25,7 +26,17 @@ const App = () => {
             backgroundColor: GlobalStyles.colors.primary500,
           },
           tabBarActiveTintColor: GlobalStyles.colors.accent500,
-        }}>
+          headerRight: ({tintColor}) => (
+            <IconButton
+              icon="add"
+              size={24}
+              color={tintColor}
+              onPress={() => {
+                navigation.navigate('ManageExpenses');
+              }}
+            />
+          ),
+        })}>
         <BottomTab.Screen
           name="RecentExpenses"
           component={RecentExpenses}
@@ -56,13 +67,23 @@ const App = () => {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: GlobalStyles.colors.primary500,
+            },
+            headerTintColor: 'white',
+          }}>
           <Stack.Screen
             name="ExpensesOverview"
             component={ExpensesOverview}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="ManageExpenses" component={ManageExpenses} />
+          <Stack.Screen
+            name="ManageExpenses"
+            component={ManageExpenses}
+            options={{presentation: 'modal'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
