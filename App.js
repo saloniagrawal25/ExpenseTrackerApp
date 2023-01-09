@@ -66,7 +66,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar barStyle="light-content" />
       <ExpensesContextProvider>
         <NavigationContainer>
           <Stack.Navigator
