@@ -7,17 +7,15 @@ import {getExpenses} from '../util/http';
 const RecentExpenses = () => {
   const expensesCtx = useContext(ExpensesContext);
 
-  const [fetchedExpenses, setFetchedExpenses] = useState([]);
-
   useEffect(() => {
     async function fetchExpenses() {
       const expenses = await getExpenses();
-      setFetchedExpenses(expenses);
+      expensesCtx.setExpenses(expenses);
     }
     fetchExpenses();
   }, []);
 
-  const recentExpenses = fetchedExpenses?.filter(expense => {
+  const recentExpenses = expensesCtx.expenses?.filter(expense => {
     const today = new Date();
     const date7DaysAgo = getDateMinusDays(today, 7);
     return expense.date >= date7DaysAgo && expense.date <= today;
