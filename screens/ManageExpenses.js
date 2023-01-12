@@ -4,6 +4,7 @@ import IconButton from '../UI/IconButton';
 import {GlobalStyles} from '../constants/styles';
 import {ExpensesContext} from '../store/expenses-context';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
+import {storeExpense} from '../util/http';
 
 const ManageExpenses = ({route, navigation}) => {
   const editedExpenseId = route.params?.expenseId;
@@ -26,9 +27,12 @@ const ManageExpenses = ({route, navigation}) => {
   };
 
   const confirmHandler = expenseData => {
-    isEditing
-      ? expensesCtx.updateExpense(editedExpenseId, expenseData)
-      : expensesCtx.addExpense(expenseData);
+    if (isEditing) {
+      expensesCtx.updateExpense(editedExpenseId, expenseData);
+    } else {
+      storeExpense(expenseData);
+      expensesCtx.addExpense(expenseData);
+    }
     navigation.goBack();
   };
 
