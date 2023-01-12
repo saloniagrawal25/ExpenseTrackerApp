@@ -8,7 +8,7 @@ import RecentExpenses from './screens/RecentExpenses';
 import ManageExpenses from './screens/ManageExpenses';
 import {GlobalStyles} from './constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-import IconButton from './UI/IconButton';
+import IconButton from './components/UI/IconButton';
 import ExpensesContextProvider from './store/expenses-context';
 
 const App = () => {

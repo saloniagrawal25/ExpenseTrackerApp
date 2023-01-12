@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {GlobalStyles} from '../constants/styles';
+import {GlobalStyles} from '../../constants/styles';
 
 const Button = ({onPress, children, mode, style}) => {
   return (
